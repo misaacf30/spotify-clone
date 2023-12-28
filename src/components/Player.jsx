@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 const Play = () => (
   <svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16">
@@ -17,6 +17,19 @@ const Pause = () => (
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [currentSong, setCurrentSong] = useState(null)
+  const audioRef = useRef()
+
+  const handleClick = () => {
+    if(isPlaying) {
+      audioRef.current.pause()
+    }
+    else {
+      audioRef.current.src = `/music/1/01.mp3`
+      audioRef.current.play()
+    }   
+    setIsPlaying(!isPlaying)
+  }
 
   return (
     <div className="flex flex-row justify-between w-full px-4 z-50">
@@ -25,7 +38,7 @@ const Player = () => {
       </div>
       <div className="grid place-content-center gap-4 flex-1">
         <div className="flex justify-center">
-          <button className="bg-white rounded-full p-2" onClick={() => setIsPlaying(!isPlaying)}>
+          <button className="bg-white rounded-full p-2" onClick={handleClick}>
             {isPlaying ? <Pause/> : <Play/>}
           </button>
         </div>
