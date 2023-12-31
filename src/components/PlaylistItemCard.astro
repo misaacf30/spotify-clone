@@ -1,6 +1,6 @@
 ---
 import type { Playlist } from "../lib/data";
-import { Play } from "./Player";
+import PlayButton from "./PlayButton";
 
 interface Props {
     playlist: Playlist;
@@ -26,11 +26,7 @@ const artistsString = artists.join(", "); // Intl.ListFormat
                 class="object-cover w-full h-full roudned-md"
                 transition:name=`playlist ${id} image`
             />
-            <div class="absolute bottom-0 right-[5%] bg-green-500 rounded-full p-4 z-10
-                transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2"
-            >
-                <Play/>
-            </div>
+            <PlayButton/>
         </picture>
 
         <div class="flex flex-col flex-auto px-2">
